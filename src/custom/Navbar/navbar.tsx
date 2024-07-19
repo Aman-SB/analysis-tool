@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { ModeToggle } from "../dark-mode";
 
 export default function Navbar() {
+    const isLoggedIn : boolean = false;
     return (
         <nav className="fixed inset-x-0 top-0 z-50 bg-white shadow-sm dark:bg-gray-900/70">
             <div className="w-full max-w-full mx-auto px-4 h-20">
@@ -56,10 +58,24 @@ export default function Navbar() {
                         </Link>
                     </nav>
                     <div className="flex items-center gap-4">
-                        <Button variant="outline" size="defaultval">
-                            Sign in
-                        </Button>
-                        <Button size="defaultval">Sign up</Button>
+                        <ModeToggle/>
+                        {isLoggedIn ? (
+                            <>
+                                <Link href="/profile">
+                                    <Button variant="outline" size="defaultval">Profile</Button>
+                                </Link>
+                                <Button variant="destructive" size="defaultval" onClick={() => {/* Handle Logout */}}>Logout</Button>
+                            </>
+                        ) : (
+                            <>
+                                <Link href="/login">
+                                    <Button variant="outline" size="defaultval">Sign In</Button>
+                                </Link>
+                                <Link href="/signup">
+                                    <Button variant="destructive" size="defaultval">Sign Up</Button>
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
